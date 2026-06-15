@@ -210,7 +210,7 @@ Type `exit` at any prompt to quit.
 .
 ├── main.py
 ├── Advanced_WorldCup_Stats_2014_2026.xlsx
-├── worldcup_v2_model.pt
+├── worldcup_model.pt
 └── README.md
 ```
 
