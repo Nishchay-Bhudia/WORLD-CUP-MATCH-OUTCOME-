@@ -1,6 +1,5 @@
 
 
-
 import os
 import math
 import difflib
@@ -582,7 +581,7 @@ def predict_match(model, dataset, team1, team2, n_sim=50_000, max_goals=10):
     print("═"*62)
     print(f"  Venue          : {venue_note}")
     print(f"  Elo Ratings    : {team1} {elo1:.0f}  |  {team2} {elo2:.0f}")
-    print(f"  xG (form)      : {_get_team_record(dataset,team1)['h_xgf']:.2f} vs "
+    print(f"  form      : {_get_team_record(dataset,team1)['h_xgf']:.2f} vs "
           f"{_get_team_record(dataset,team2)['h_xgf']:.2f}")
     print(f"  Expected Goals : {lam1:.2f} – {lam2:.2f}")
     print(f"  Most Likely    : {modal_r} – {modal_c}  "
@@ -636,7 +635,7 @@ if __name__ == '__main__':
     split = int(len(raw) * 0.90)
     df_tr = raw.iloc[:split]
     df_va = raw.iloc[split:]
-    print(f"[Split] Train: {len(df_tr)} | Val: {len(df_va)}")
+    print(f"[Split] Train : {len(df_tr)} | Val: {len(df_va)}")
 
     dataset_train = WorldCupDataset(df_tr, fit_scaler=True)
     dataset_val   = WorldCupDataset(df_va, scaler=dataset_train.scaler, fit_scaler=False)
@@ -659,13 +658,13 @@ if __name__ == '__main__':
         print("[Training] No saved model found ... training from scratch …")
         model = train(dataset_train, dataset_val, max_epochs=2000, batch_size=128, lr=3e-4)
         torch.save(model.state_dict(), MODEL_FILE)
-        print(f"[Saved] Model → {MODEL_FILE}")
+        print(f"[Saved] Model  {MODEL_FILE}")
 
-    print("\n═══ World Cup Predictor v2 — READY ═══")
+    print("\n═══ World Cup Predictor — READY ═══")
     print("Type team names to predict. Enter 'exit' to quit.\n")
 
     while True:
-        t1 = get_valid_team("Team 1: ", dataset_full.all_teams)
+        t1 = get_valid_team("Team 1 : ", dataset_full.all_teams)
         if t1 == 'exit': break
         t2 = get_valid_team("Team 2: ", dataset_full.all_teams)
         if t2 == 'exit': break
